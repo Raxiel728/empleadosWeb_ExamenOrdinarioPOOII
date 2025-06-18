@@ -62,7 +62,9 @@ src/main/java/com/example/empleadosweb/DBConnection.java
 Cambia el usuario y contraseña según tu configuración:
 
 String url = "jdbc:mysql://localhost:3306/employees";
+
 String user = "root"; // tu usuario de MySQL
+
 String password = "tu_contraseña";
 
 🚀 Paso 3 – Ejecutar el proyecto en IntelliJ
