@@ -41,12 +41,19 @@ Ejecuta este comando para crear y cargar la base principal:
 Luego ejecuta los archivos .dump en el orden indicado:
 
 "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p employees < "load_employees.dump"
+
 "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p employees < "load_departments.dump"
+
 "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p employees < "load_dept_emp.dump"
+
 "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p employees < "load_dept_manager.dump"
+
 "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p employees < "load_titles.dump"
+
 "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p employees < "load_salaries1.dump"
+
 "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p employees < "load_salaries2.dump"
+
 "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p employees < "load_salaries3.dump"
 
 ⚙️ Paso 2 – Configurar la conexión a MySQL
