@@ -1,3 +1,9 @@
+Este proyecto se desarrolló utilizando IntelliJ IDEA como entorno principal y Apache Tomcat como servidor para ejecutar la aplicación web. Trabajamos con Java 17 y JSP, organizando el proyecto con base en el modelo MVC para separar la lógica, los datos y la vista.
+
+La base de datos utilizada fue MySQL, y se conectó desde Java mediante JDBC. La configuración de acceso se hizo de forma manual, editando el archivo DBConnection.java con nuestro usuario, contraseña y puerto de conexión local.
+
+
+
 📌 Requisitos previos
 Asegúrate de tener lo siguiente instalado:
 
@@ -84,3 +90,9 @@ Haz clic en ▶️ Run
 Abre en tu navegador:
 
 http://localhost:8080/
+
+
+📸 Nota adicional:  
+
+Para que el logo institucional se visualice correctamente en la página de inicio, asegúrate de que la imagen **"Logo_de_la_Universidad_Veracruzana.png"** esté ubicada en la carpeta:  
+`webapp/img/`
