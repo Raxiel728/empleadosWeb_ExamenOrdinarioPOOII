@@ -134,4 +134,35 @@ public class EmpleadoDAO {
 
         return gerentes.stream().anyMatch(e -> e == empNo);
     }
+
+    // -----------------------------------------
+    // obtener un solo empleado con detalles usando Streams
+    // -----------------------------------------
+    public static Empleado obtenerEmpleadoConDetalles(int empNo) {
+        List<Empleado> todos = new ArrayList<>();
+
+        try (Connection con = DBConnection.getConnection();
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM employees")) {
+
+            while (rs.next()) {
+                Empleado e = new Empleado(
+                        rs.getInt("emp_no"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("gender"),
+                        rs.getString("hire_date")
+                );
+                todos.add(e);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return todos.stream()
+                .filter(e -> e.getEmpNo() == empNo)
+                .findFirst()
+                .orElse(null);
+    }
 }

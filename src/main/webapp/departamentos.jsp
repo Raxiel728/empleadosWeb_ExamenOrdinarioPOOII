@@ -12,7 +12,7 @@
   <title>Lista de Departamentos</title>
 </head>
 <body>
-<h2>Lista de departamentos (página ${pagina})</h2>
+<h2>🏢 Lista de departamentos (página <%= request.getAttribute("pagina") %>)</h2>
 
 <table border="1" cellpadding="5" cellspacing="0">
   <tr>
@@ -26,7 +26,11 @@
   %>
   <tr>
     <td><%= d.getDeptNo() %></td>
-    <td><%= d.getDeptName() %></td>
+    <td>
+      <a href="detalle-departamento?deptNo=<%= d.getDeptNo() %>">
+        <%= d.getDeptName() %>
+      </a>
+    </td>
   </tr>
   <%
     }
@@ -45,5 +49,7 @@
 | <a href="departamentos?pagina=<%= ((int) request.getAttribute("pagina")) - 1 %>">← Página anterior</a>
 <% } %>
 
+<br><br>
+<a href="index.jsp">⬅ Volver al inicio</a>
 </body>
 </html>

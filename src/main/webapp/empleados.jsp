@@ -49,10 +49,13 @@
 </table>
 
 <br>
-<a href="empleados?pagina=<%= ((int) request.getAttribute("pagina")) + 1 %>">Siguiente página →</a>
-
-<% if (((int) request.getAttribute("pagina")) > 1) { %>
-| <a href="empleados?pagina=<%= ((int) request.getAttribute("pagina")) - 1 %>">← Página anterior</a>
+<a href="empleados?pagina=<%= request.getAttribute("pagina") != null ? ((Integer)request.getAttribute("pagina")) + 1 : 2 %>">Siguiente página</a>
+<% if (request.getAttribute("pagina") != null && ((Integer)request.getAttribute("pagina")) > 1) { %>
+<a href="empleados?pagina=<%= ((Integer)request.getAttribute("pagina")) - 1 %>">← Página anterior</a>
 <% } %>
+<br><br>
+<a href="index.jsp">
+  <button>⬅ Volver al inicio</button>
+</a>
 </body>
 </html>

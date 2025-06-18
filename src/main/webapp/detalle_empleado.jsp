@@ -56,6 +56,6 @@
 <% } %>
 
 <br>
-<a href="empleados.jsp">← Volver a la lista de empleados</a>
+<a href="empleados?pagina=<%= request.getAttribute("pagina") != null ? request.getAttribute("pagina") : 1 %>">← Volver a la lista de empleados</a>
 </body>
 </html>
