@@ -28,7 +28,11 @@
       for (Empleado e : empleados) {
   %>
   <tr>
-    <td><%= e.getEmpNo() %></td>
+    <td>
+      <a href="detalle-empleado?empNo=<%= e.getEmpNo() %>">
+        <%= e.getEmpNo() %>
+      </a>
+    </td>
     <td><%= e.getFirstName() %></td>
     <td><%= e.getLastName() %></td>
     <td><%= e.getGender() %></td>

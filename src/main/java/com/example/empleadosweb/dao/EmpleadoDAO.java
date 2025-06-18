@@ -1,6 +1,5 @@
 package com.example.empleadosweb.dao;
 
-
 import com.example.empleadosweb.modelo.Empleado;
 import com.example.empleadosweb.DBConnection;
 
@@ -11,6 +10,9 @@ import java.util.stream.Collectors;
 
 public class EmpleadoDAO {
 
+    // -----------------------------------------
+    // obtener empleados paginados con Streams
+    // -----------------------------------------
     public static List<Empleado> obtenerEmpleadosPaginados(int pagina, int cantidad) {
         List<Empleado> todos = new ArrayList<>();
 
@@ -33,10 +35,103 @@ public class EmpleadoDAO {
             e.printStackTrace();
         }
 
-        // aplicar paginación con streams
         return todos.stream()
                 .skip((long) (pagina - 1) * cantidad)
                 .limit(cantidad)
                 .collect(Collectors.toList());
+    }
+
+    // -----------------------------------------
+    // obtener títulos de un empleado usando Streams
+    // -----------------------------------------
+    public static List<String> obtenerTitulosPorEmpleado(int empNo) {
+        List<String[]> todos = new ArrayList<>();
+
+        try (Connection con = DBConnection.getConnection();
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT emp_no, title FROM titles")) {
+
+            while (rs.next()) {
+                todos.add(new String[]{ rs.getString("emp_no"), rs.getString("title") });
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return todos.stream()
+                .filter(t -> Integer.parseInt(t[0]) == empNo)
+                .map(t -> t[1])
+                .collect(Collectors.toList());
+    }
+
+    // -----------------------------------------
+    // obtener departamentos de un empleado usando Streams
+    // -----------------------------------------
+    public static List<String> obtenerDepartamentosPorEmpleado(int empNo) {
+        List<String[]> todos = new ArrayList<>();
+
+        try (Connection con = DBConnection.getConnection();
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery(
+                     "SELECT de.emp_no, d.dept_name FROM dept_emp de JOIN departments d ON de.dept_no = d.dept_no")) {
+
+            while (rs.next()) {
+                todos.add(new String[]{ rs.getString("emp_no"), rs.getString("dept_name") });
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return todos.stream()
+                .filter(e -> Integer.parseInt(e[0]) == empNo)
+                .map(e -> e[1])
+                .collect(Collectors.toList());
+    }
+
+    // -----------------------------------------
+    // obtener salarios de un empleado usando Streams
+    // -----------------------------------------
+    public static List<Integer> obtenerSalariosPorEmpleado(int empNo) {
+        List<String[]> todos = new ArrayList<>();
+
+        try (Connection con = DBConnection.getConnection();
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT emp_no, salary FROM salaries")) {
+
+            while (rs.next()) {
+                todos.add(new String[]{ rs.getString("emp_no"), rs.getString("salary") });
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return todos.stream()
+                .filter(s -> Integer.parseInt(s[0]) == empNo)
+                .map(s -> Integer.parseInt(s[1]))
+                .collect(Collectors.toList());
+    }
+
+    // -----------------------------------------
+    // verificar si un empleado es gerente usando Streams
+    // -----------------------------------------
+    public static boolean esGerente(int empNo) {
+        List<Integer> gerentes = new ArrayList<>();
+
+        try (Connection con = DBConnection.getConnection();
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT emp_no FROM dept_manager")) {
+
+            while (rs.next()) {
+                gerentes.add(rs.getInt("emp_no"));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return gerentes.stream().anyMatch(e -> e == empNo);
     }
 }
